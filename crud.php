@@ -155,7 +155,7 @@ class Crud extends Koneksi
       
     }
 
-    public function hasilAkhir($daftar_cf, $groupKemungkinanPenyakit)
+    public function hasilAkhir($daftar_cf, $groupKemungkinanPenyakit, $namaAnggrek)
     {
         // Include Composer autoloader
         require_once __DIR__ . '/vendor/autoload.php'; // Adjust the path based on your project structure
@@ -202,12 +202,14 @@ class Crud extends Koneksi
                     <tr style="background-color: green;">
                         <th style="border: 1px solid black; padding: 8px;">Nama Penyakit</th>
                         <th style="border: 1px solid black; padding: 8px;">Nilai CF</th>
+                        <th style="border: 1px solid black; padding: 8px;">Nama Anggrek</th>
                     </tr>';
 
                 // Table body row
                 $html .= '<tr>
                         <td style="border: 1px solid black; padding: 8px;">' . $namaPenyakit . '</td>
                         <td style="border: 1px solid black; padding: 8px;">' . $merubahIndexCF[$i] . '%</td>
+                        <td style="border: 1px solid black; padding: 8px;">' . $namaAnggrek . '</td>
                     </tr>';
 
                 // Close table
@@ -218,9 +220,19 @@ class Crud extends Koneksi
 
                 // Save result into database
                 $nilaiCF = $merubahIndexCF[$i];
-                $this->simpanHasil($namaPenyakit, $nilaiCF);
+                $this->simpanHasil($namaPenyakit, $nilaiCF, $namaAnggrek);
             }
         }
+
+        // Set locale to Indonesian
+        setlocale(LC_TIME, 'id_ID.UTF-8');
+        // Get current date
+        $currentDate = strftime('%A %d-%m-%Y');
+
+        // Add date to bottom right corner
+        $mpdf->SetHTMLFooter('<div style="text-align: right;">Jakarta, ' . $currentDate . '</div>
+        <div style="border-top: 1px solid black; margin-top: 10px; padding-top: 5px;">&nbsp;</div>
+        ');
 
         // Save PDF to a file
         $pdfFilePath = 'hasil_perhitungan_cf.pdf';
@@ -234,15 +246,14 @@ class Crud extends Koneksi
 
             
     
-    private function simpanHasil($namaPenyakit, $nilaiCF)
-    {
+    private function simpanHasil($namaPenyakit, $nilaiCF, $namaAnggrek) {
         // Siapkan statement SQL untuk menyimpan hasil perhitungan
-        $sql = "INSERT INTO hasilperhitungancf (nama_penyakit, nilai_cf) VALUES (?, ?)";
+        $sql = "INSERT INTO hasilperhitungancf (nama_penyakit, nilai_cf, nama_anggrek) VALUES (?, ?, ?)";
     
         // Gunakan prepared statement untuk mencegah SQL injection
         if ($stmt = $this->conn->prepare($sql)) {
             // Bind parameter
-            $stmt->bind_param("sd", $namaPenyakit, $nilaiCF);
+            $stmt->bind_param("sds", $namaPenyakit, $nilaiCF, $namaAnggrek);
     
             // Eksekusi statement
             if ($stmt->execute()) {

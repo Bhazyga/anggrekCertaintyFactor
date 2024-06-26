@@ -82,6 +82,7 @@ $crud = new Crud();
                             if (isset($_POST['button'])) {
                                 $groupKemungkinanPenyakit = $crud->getGroupPengetahuan(implode(",", $_POST['gejala']));
                                 $sql = $_POST['gejala'];
+                                $namaAnggrek = $_POST['nama_anggrek'];
                                 $test = $_POST['kondisi'];
                                 $wxgejala = implode($_POST['gejala']);
                                 $host = "localhost";
@@ -210,7 +211,7 @@ $crud = new Crud();
                             <div class="col-md-12 text-center">
             <?php
             $crud->hasilCFTertinggi($daftar_cf, $groupKemungkinanPenyakit);
-            $pdfFilePath = $crud->hasilAkhir($daftar_cf, $groupKemungkinanPenyakit);
+            $pdfFilePath = $crud->hasilAkhir($daftar_cf, $groupKemungkinanPenyakit,$namaAnggrek);
             ?>
             <!-- Add button to download PDF -->
             <button id="print-pdf" class="btn btn-primary btn-pdf">Cetak PDF</button>

@@ -24,7 +24,7 @@ $arrayName = $crud->readGejala();
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 100vh;
+        min-height: 150vh;
     }
     .container {
         width: 80%;
@@ -89,6 +89,12 @@ $arrayName = $crud->readGejala();
     <div class="container">
         <h1>Periksa Gejala Menggunakan (Certainty Factor)</h1>
         <form name="form1" method="post" action="hasil.php">
+                    <tr>
+                        <td colspan="3">
+                            <label for="nama_anggrek">Nama Anggrek:</label>
+                            <input type="text" id="nama_anggrek" name="nama_anggrek" required>
+                        </td>
+                    </tr>
             <table>
                 <thead>
                     <tr>
@@ -119,7 +125,7 @@ $arrayName = $crud->readGejala();
                                 <option value="-0.8">HAMPIR PASTI TIDAK</option>
                                 <option value="-1.0">PASTI TIDAK</option>
                             </select>
-                        </td>
+                         </td>
                     </tr>
                     <?php } ?>
                     <tr>
