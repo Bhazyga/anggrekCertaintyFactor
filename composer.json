@@ -1,0 +1,17 @@
+{
+    "name": "administrator/anggrek",
+    "autoload": {
+        "psr-4": {
+            "Administrator\\Anggrek\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Bhazyga",
+            "email": "bhazyacyuta@gmail.com"
+        }
+    ],
+    "require": {
+        "mpdf/mpdf": "8.2.1"
+    }
+}
