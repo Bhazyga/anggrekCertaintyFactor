@@ -90,7 +90,7 @@ $crud = new Crud();
                                     $password = "";
                                     $db = "gerai_anggrek";
 
-        print_r($groupKemungkinanPenyakit);
+        // print_r($groupKemungkinanPenyakit);
                                 if (isset($sql)) {
                                     for ($h = 0; $h < count($sql); $h++) {
                                         $kemungkinanPenyakit[] = $crud->getKemungkinanPenyakit($sql[$h]);
