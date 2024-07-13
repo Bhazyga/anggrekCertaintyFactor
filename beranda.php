@@ -11,15 +11,19 @@ $categories = $data['categories'];
 $values = $data['values'];
 
 // Dummy data for penyakit anggrek info (replace with actual data retrieval)
-$namaPenyakit = "Penyakit Anggrek";
-$deskripsiPenyakit = "Penyakit anggrek adalah ... (informasi penyakit)";
+$namaPenyakit = "Nama dari penyakit anggrek";
+$deskripsiPenyakit = "Gejala adalah Indikasi awal penyakit anggrek";
 
 // Dummy data for berita tentang pengetahuan anggrek (replace with actual news data)
 $judulBerita = "Pengetahuan Anggrek: Panduan untuk Pemula";
-$isiBerita = "Dalam dunia anggrek, pengetahuan dasar sangatlah penting untuk keberhasilan dalam bercocok tanam. Di sini kami membahas panduan dasar tentang perawatan anggrek untuk pemula.";
+$isiBerita = "Dalam dunia anggrek, pengetahuan dasar sangatlah penting untuk keberhasilan dalam bercocok tanam. Di sini kami membahas panduan dasar tentang perawatan anggrek untuk pemula.
+Cek gejala dengan menginput indikasi gejala dari anggrek anda, kemudian submit agar gejala yang anda berikan di hitung oleh pengetahuan penyakit berdasarkan gejala dengan bobot yang kami hitung
+. <br/><br/><br/>
+Dibawah ini adalah data yang kami munculkan di dalam chart
+";
 
 // Fetch data for the second chart (assuming the query is executed similarly as before)
-$data2 = $koneksi->getDataForSecondChart();
+$data2 = $koneksi->getChart2();
 $labels2 = $data2['labels'];
 $data2Values = $data2['data'];
 
@@ -90,7 +94,7 @@ $bubbleChartData = $koneksi->getBubbleChartData();
                 <div class="card">
                     <h2>Informasi Penyakit Anggrek</h2>
                     <p><strong>Nama Penyakit:</strong> <?php echo $namaPenyakit; ?></p>
-                    <p><strong>Deskripsi:</strong> <?php echo $deskripsiPenyakit; ?></p>
+                    <p><strong>Gejala:</strong> <?php echo $deskripsiPenyakit; ?></p>
                 </div>
             </div>
         </div>
@@ -193,7 +197,6 @@ $bubbleChartData = $koneksi->getBubbleChartData();
                 }
             });
 
-            // Gejala Chart (Bar Chart)
             var gejalaCategories = <?php echo json_encode($gejalaCategories); ?>;
             var gejalaValues = <?php echo json_encode($gejalaValues); ?>;
             var ctxGejala = document.getElementById('gejalaChart').getContext('2d');

@@ -79,17 +79,18 @@ $crud = new Crud();
                         <div class="row">
                             <div class="col-md-12 text-center">
                             <?php
-                            if (isset($_POST['button'])) {
-                                $groupKemungkinanPenyakit = $crud->getGroupPengetahuan(implode(",", $_POST['gejala']));
-                                $sql = $_POST['gejala'];
-                                $namaAnggrek = $_POST['nama_anggrek'];
-                                $test = $_POST['kondisi'];
-                                $wxgejala = implode($_POST['gejala']);
-                                $host = "localhost";
-                                $id = "root";
-                                $password = "";
-                                $db = "gerai_anggrek";
+                                if (isset($_POST['button'])) {
+                                    $groupKemungkinanPenyakit = $crud->getGroupPengetahuan(implode(",", $_POST['gejala']));
+                                    $sql = $_POST['gejala'];
+                                    $namaAnggrek = $_POST['nama_anggrek'];
+                                    $test = $_POST['kondisi'];
+                                    $wxgejala = implode($_POST['gejala']);
+                                    $host = "localhost";
+                                    $id = "root";
+                                    $password = "";
+                                    $db = "gerai_anggrek";
 
+        print_r($groupKemungkinanPenyakit);
                                 if (isset($sql)) {
                                     for ($h = 0; $h < count($sql); $h++) {
                                         $kemungkinanPenyakit[] = $crud->getKemungkinanPenyakit($sql[$h]);
@@ -106,12 +107,6 @@ $crud = new Crud();
                                         }
                                     }
 
-                                    for ($ba = 0; $ba < count($sql); $ba++) {
-                                        $updatemb = "UPDATE pengetahuan SET mb=$test[$ba] WHERE id_gejala = $wxgejala[$ba]";
-                                        $kon = mysqli_connect($host, $id, $password, $db);
-                                        $query = mysqli_query($kon, $updatemb);
-                                    }
-
                                     $id_penyakit_terbesar = '';
                                     $nama_penyakit_terbesar = '';
                                     $kombin = [];
@@ -121,6 +116,7 @@ $crud = new Crud();
                                         $namaPenyakit = $groupKemungkinanPenyakit[$h]['nama_penyakit'];
                                         $cfuser = [];
                                         echo "<br/>===========================================<br/>Proses Penyakit " . $h . "." . $namaPenyakit . "<br/>===========================================<br/>";
+                                       
 
                                         for ($x = 0; $x < count($listIdKemungkinan[$namaPenyakit]); $x++) {
                                             $daftarKemungkinanPenyakit = $crud->getListPenyakit($listIdKemungkinan[$namaPenyakit][$x]);
@@ -130,9 +126,12 @@ $crud = new Crud();
                                                 $persen = 100;
                                                 $mdbaru = (float)$daftarKemungkinanPenyakit[$i]['md'];
 
-                                                if (count($listIdKemungkinan) == 1) {
+                                                // Hitung MB baru berdasarkan kondisi input pengguna
+                                                $mbbaru = (isset($test[$h])) ? (float)$test[$h] : (float)$daftarKemungkinanPenyakit[$i]['mb'];
+
+                                                if (count($listIdKemungkinan) == 0) {
                                                     echo "Jumlah Gejala = " . count($listIdKemungkinan[$namaPenyakit]) . "<br/>";
-                                                    $mb = $daftarKemungkinanPenyakit[$i]['mb'];
+                                                    $mb = $mbbaru;
                                                     $md = $daftarKemungkinanPenyakit[$i]['md'];
                                                     $cf = $mb * $md;
                                                     $cf1 = $cf * $persen;
@@ -144,7 +143,7 @@ $crud = new Crud();
                                                 } else {
                                                     if ($x == 0) {
                                                         echo "Jumlah Gejala = " . count($listIdKemungkinan[$namaPenyakit]) . "<br/>";
-                                                        $mb = $daftarKemungkinanPenyakit[$i]['mb'];
+                                                        $mb = $mbbaru;
                                                         $md = $daftarKemungkinanPenyakit[$i]['md'];
                                                         echo "<br/>cfR = " . $mb . "<br/>";
                                                         echo "cfEvid = " . $md . "<br/>";
@@ -203,7 +202,9 @@ $crud = new Crud();
                                 }
                             }
                             ?>
+
                          </div>
+                     
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">

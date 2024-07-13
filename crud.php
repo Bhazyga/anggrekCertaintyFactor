@@ -28,34 +28,34 @@ class Crud extends Koneksi
       * funtion getGejala
       * mengambil data sebagian dari tabel gejala
      */
-    public function getGejala($value)
-    {
-      $sql = "SELECT * FROM gejala WHERE id_gejala IN ($value)";
-      $result = $this->conn->query($sql);
+    // public function getGejala($value)
+    // {
+    //   $sql = "SELECT * FROM gejala WHERE id_gejala IN ($value)";
+    //   $result = $this->conn->query($sql);
 
-      // merubah data tabel menjadi array
-      $row = [];
-      while ($row = $result->fetch_assoc()) {
-			  $rows[] = $row;
-		  }
+    //   // merubah data tabel menjadi array
+    //   $row = [];
+    //   while ($row = $result->fetch_assoc()) {
+	// 		  $rows[] = $row;
+	// 	  }
 
-		  return $rows;
-    }
+	// 	  return $rows;
+    // }
 
-    public function getPenyakit($value)
-    {
+    // public function getPenyakit($value)
+    // {
 
-      $sql = "SELECT * FROM penyakit WHERE id_penyakit IN ($value)";
-      $result = $this->conn->query($sql);
+    //   $sql = "SELECT * FROM penyakit WHERE id_penyakit IN ($value)";
+    //   $result = $this->conn->query($sql);
 
-      // merubah data tabel menjadi array
-      $row = [];
-      while ($row = $result->fetch_assoc()) {
-			  $rows[] = $row;
-		  }
+    //   // merubah data tabel menjadi array
+    //   $row = [];
+    //   while ($row = $result->fetch_assoc()) {
+	// 		  $rows[] = $row;
+	// 	  }
 
-		  return $rows;
-    }
+	// 	  return $rows;
+    // }
 
     /**
      * Gets the group pengetahuan.
@@ -63,27 +63,31 @@ class Crud extends Koneksi
      * mengambil salah satu nama penyakit bila terdapat nama penyakit sama
      */
     public function getGroupPengetahuan($value)
-    {
-      // p, g , pyt merupakan inisialisasi dari tabel yang dituju
-      $sql = "SELECT pyt.nama_penyakit FROM pengetahuan p
-        JOIN gejala g ON p.id_gejala = g.id_gejala
-        JOIN penyakit pyt ON p.kode_penyakit = pyt.kode_penyakit
-        WHERE p.id_gejala IN ($value)
-        GROUP BY p.kode_penyakit ORDER BY p.kode_penyakit";
+{
+    // p, g , pyt merupakan inisialisasi dari tabel yang dituju
+    $sql = "SELECT pyt.nama_penyakit, COUNT(p.id_gejala) AS jumlah_gejala
+            FROM pengetahuan p
+            JOIN gejala g ON p.id_gejala = g.id_gejala
+            JOIN penyakit pyt ON p.kode_penyakit = pyt.kode_penyakit
+            WHERE p.id_gejala IN ($value)
+            GROUP BY pyt.kode_penyakit
+            ORDER BY pyt.kode_penyakit";
 
-      $result = $this->conn->query($sql);
+    $result = $this->conn->query($sql);
 
-      if (isset($result)) {
+    if ($result) {
         // merubah data tabel menjadi array
-        $row = [];
+        $rows = [];
         while ($row = $result->fetch_assoc()) {
-          $rows[] = $row;
+            $rows[] = $row;
         }
 
         return $rows;
-      }
-
+    } else {
+        return []; // Return an empty array if no result is found
     }
+}
+
 
     /**
      * Gets the kemungkinan penyakit.
@@ -431,6 +435,21 @@ class Crud extends Koneksi
             return false;
         }
     }
+
+    public function fetchAllPengetahuan() {
+        $sql = "SELECT p.*, py.nama_penyakit
+                FROM pengetahuan p
+                JOIN penyakit py ON p.kode_penyakit = py.kode_penyakit";
+        $result = $this->conn->query($sql);
+
+        $rows = [];
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+
+        return $rows;
+    }
+
 
     public function updatePenyakit($current_kode_penyakit, $new_kode_penyakit, $nama_penyakit) {
         $stmt = $this->conn->prepare("UPDATE penyakit SET kode_penyakit = ?, nama_penyakit = ? WHERE kode_penyakit = ?");

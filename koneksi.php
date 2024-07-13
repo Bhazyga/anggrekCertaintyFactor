@@ -16,7 +16,7 @@ class Koneksi
 
         // Check connection
         if (!$this->conn) {
-            die("Error connecting to the database: " . mysqli_connect_error());
+            die("Error Koneksi ke database: " . mysqli_connect_error());
         } else {
             // Connection successful (optional message)
             // echo "Connected successfully";
@@ -44,7 +44,7 @@ class Koneksi
 
         return ['categories' => $categories, 'values' => $values];
     }
-    public function getDataForSecondChart()
+    public function getChart2()
     {
         $query = "SELECT kode_penyakit, COUNT(*) as total FROM pengetahuan GROUP BY kode_penyakit";
         $result = mysqli_query($this->conn, $query);

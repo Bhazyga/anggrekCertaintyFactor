@@ -35,7 +35,7 @@ if (isset($_GET['delete'])) {
     }
 }
 
-$pengetahuanData = $crud->fetchAll('pengetahuan');
+$pengetahuanData = $crud->fetchAllPengetahuan();
 $gejalaData = $crud->fetchAll('gejala');
 $penyakitData = $crud->fetchAll('penyakit');
 ?>
@@ -113,10 +113,11 @@ $penyakitData = $crud->fetchAll('penyakit');
         }
     </style>
     <script>
-        function editRow(id, id_gejala, kode_penyakit, mb, md) {
+        function editRow(id, id_gejala, kode_penyakit, nama_penyakit, mb, md) {
             document.getElementById('id').value = id;
             document.getElementById('id_gejala').value = id_gejala;
             document.getElementById('kode_penyakit').value = kode_penyakit;
+            document.getElementById('nama_penyakit').value = nama_penyakit;
             document.getElementById('mb').value = mb;
             document.getElementById('md').value = md;
         }
@@ -139,10 +140,9 @@ $penyakitData = $crud->fetchAll('penyakit');
                 <label for="kode_penyakit">Kode Penyakit:</label>
                 <select id="kode_penyakit" name="kode_penyakit" required>
                     <?php foreach ($penyakitData as $penyakit) : ?>
-                        <option value="<?php echo $penyakit['kode_penyakit']; ?>"><?php echo $penyakit['kode_penyakit']; ?></option>
+                        <option value="<?php echo $penyakit['kode_penyakit']; ?>"><?php echo $penyakit['kode_penyakit']; ?> - <?php echo $penyakit['nama_penyakit']; ?></option>
                     <?php endforeach; ?>
                 </select>
-                
                 <label for="mb">MB:</label>
                 <input type="number" step="0.01" id="mb" name="mb" required>
                 <label for="md">MD:</label>
@@ -156,22 +156,25 @@ $penyakitData = $crud->fetchAll('penyakit');
             <h2>Pengetahuan Table</h2>
             <table>
                 <tr>
-                    <th>ID</th>
+                    <!-- <th>ID</th> -->
                     <th>ID Gejala</th>
                     <th>Kode Penyakit</th>
+                    <th>Nama Penyakit</th>
                     <th>MB</th>
                     <th>MD</th>
                     <th>Actions</th>
                 </tr>
                 <?php foreach ($pengetahuanData as $pengetahuan) : ?>
                 <tr>
-                    <td><?php echo $pengetahuan['id_pengetahuan']; ?></td>
+                    <!-- Kalo Mau di kasih liat id pengetahuan nya nyalahin aja  -->
+                    <!-- <td><?php echo $pengetahuan['id_pengetahuan']; ?></td>  --> 
                     <td><?php echo $pengetahuan['id_gejala']; ?></td>
                     <td><?php echo $pengetahuan['kode_penyakit']; ?></td>
+                    <td><?php echo $pengetahuan['nama_penyakit']; ?></td>
                     <td><?php echo $pengetahuan['mb']; ?></td>
                     <td><?php echo $pengetahuan['md']; ?></td>
                     <td class="action-buttons">
-                        <button onclick="editRow('<?php echo $pengetahuan['id_pengetahuan']; ?>', '<?php echo $pengetahuan['id_gejala']; ?>', '<?php echo $pengetahuan['kode_penyakit']; ?>', '<?php echo $pengetahuan['mb']; ?>', '<?php echo $pengetahuan['md']; ?>')">Edit</button>
+                        <button onclick="editRow('<?php echo $pengetahuan['id_pengetahuan']; ?>', '<?php echo $pengetahuan['id_gejala']; ?>', '<?php echo $pengetahuan['kode_penyakit']; ?>', '<?php echo $pengetahuan['nama_penyakit']; ?>', '<?php echo $pengetahuan['mb']; ?>', '<?php echo $pengetahuan['md']; ?>')">Edit</button>
                         <a href="crudPengetahuan.php?delete=true&id=<?php echo $pengetahuan['id_pengetahuan']; ?>" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
                     </td>
                 </tr>

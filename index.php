@@ -24,7 +24,7 @@ $arrayName = $crud->readGejala();
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 150vh;
+        min-height: 200vh;
     }
     .container {
         width: 80%;
