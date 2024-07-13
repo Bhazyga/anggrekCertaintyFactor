@@ -95,6 +95,7 @@ $bubbleChartData = $koneksi->getBubbleChartData();
                     <h2>Informasi Penyakit Anggrek</h2>
                     <p><strong>Nama Penyakit:</strong> <?php echo $namaPenyakit; ?></p>
                     <p><strong>Gejala:</strong> <?php echo $deskripsiPenyakit; ?></p>
+                    <p>Ini Updatean Terbaru </p>
                 </div>
             </div>
         </div>
@@ -131,7 +132,6 @@ $bubbleChartData = $koneksi->getBubbleChartData();
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // First Chart (Line Chart)
             var categories = <?php echo json_encode($categories); ?>;
             var values = <?php echo json_encode($values); ?>;
             var ctxLine = document.getElementById('myLineChart').getContext('2d');
@@ -157,7 +157,6 @@ $bubbleChartData = $koneksi->getBubbleChartData();
                 }
             });
 
-            // Second Chart (Bubble Chart)
             var bubbleData = <?php echo json_encode($bubbleChartData); ?>;
             var bubbleDataset = bubbleData.map(item => ({
                 x: item.mb,
