@@ -151,7 +151,7 @@ $crud = new Crud();
                                                         $cf1 = $cf * $persen;
                                                         $cflama = $cf;
                                                         $cfkombin = $cflama;
-                                                        echo "cf = cfR * cfEvid = " . $mb . " * " . $md . " = " . $cf . "<br/>";
+                                                        echo "cf = Mb * md = " . $mb . " * " . $md . " = " . $cf . "<br/>";
                                                         echo "cf = cf * 100% = " . $cf . " * " . $persen . " = " . $cf1 . "%<br/><br/><br/>";
                                                         $daftar_cf[$namaPenyakit][] = $cf;
                                                         array_push($kombin, $cflama);
