@@ -4,7 +4,7 @@ include 'crud.php';
 
 $crudGejala = new crud();
 
-// Handle form submissions
+// Ini Untuk Submit
 if (isset($_POST['submit_gejala'])) {
     $nama_gejala = $_POST['nama_gejala'];
 
@@ -24,7 +24,7 @@ if (isset($_POST['submit_gejala'])) {
     }
 }
 
-// Handle delete action
+// Fungsi delete 
 if (isset($_GET['delete'])) {
     $id = $_GET['id'];
     if ($crudGejala->deleteGejala($id)) {
@@ -34,7 +34,7 @@ if (isset($_GET['delete'])) {
     }
 }
 
-// Fetch all gejala data
+// Ambil Data gejala
 $gejalaData = $crudGejala->fetchAllGejala();
 ?>
 

@@ -2,7 +2,7 @@
     <!-- Navigation Bar -->
     <div style="background-color: white; overflow: hidden; padding: 10px;width: 100%;position: fixed; top: 0;z-index: 200; ">
         <a href="index" style="float: left; text-decoration: none; color: dark; font-size: 27px; padding: 5px 15px;">
-            <!-- Logo (Assume logo.png is in the same directory) -->
+          
             <img src="gambar/anggrekbaru.png" alt="Logo" style="height: 60px; vertical-align: middle;">
             Web anggrek
         </a>
