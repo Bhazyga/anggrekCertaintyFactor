@@ -13,7 +13,7 @@ class simpanHasil extends Koneksi
 
     public function readGejala()
     {
-        $sql = "SELECT * FROM gejala"; // Assuming 'gejala' is the correct table name
+        $sql = "SELECT * FROM gejala"; 
         $result = $this->conn->query($sql);
 
         $rows = [];

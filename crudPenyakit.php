@@ -6,18 +6,16 @@ $crud = new Crud();
 
 if (isset($_POST['submit_penyakit'])) {
     $current_kode_penyakit = $_POST['current_kode_penyakit'];
-    $new_kode_penyakit = $_POST['kode_penyakit']; // new_kode_penyakit should be fetched from the form
+    $new_kode_penyakit = $_POST['kode_penyakit']; 
     $nama_penyakit = $_POST['nama_penyakit'];
 
     if ($crud->penyakitExists($current_kode_penyakit)) {
-        // Update existing penyakit
         if ($crud->updatePenyakit($current_kode_penyakit, $new_kode_penyakit, $nama_penyakit)) {
             echo "<p style='color: green;'>Penyakit data updated successfully.</p>";
         } else {
             echo "<p style='color: red;'>Failed to update penyakit data.</p>";
         }
     } else {
-        // Insert new penyakit
         if ($crud->insertPenyakit($new_kode_penyakit, $nama_penyakit)) {
             echo "<p style='color: green;'>Penyakit data inserted successfully.</p>";
         } else {

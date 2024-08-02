@@ -1,9 +1,9 @@
 <?php
 session_start();
-include 'koneksi.php'; // Include your Koneksi class file
+include 'koneksi.php'; 
 
-$koneksi = new Koneksi(); // Instantiate the Koneksi class to establish database connection
-$conn = $koneksi->getConnection(); // Retrieve the database connection object
+$koneksi = new Koneksi();
+$conn = $koneksi->getConnection(); 
 
 $message = '';
 
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         if (password_verify($password, $row['pw'])) {
-            // Set session
+            // session
             $_SESSION['user_id'] = $row['id'];
             header("Location: index");
             exit();
@@ -33,7 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Close the database connection
 $conn->close();
 ?>
 

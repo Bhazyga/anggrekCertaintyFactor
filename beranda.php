@@ -2,19 +2,15 @@
 include 'navbar.php';
 include 'koneksi.php';
 
-// Create an instance of the Koneksi class
 $koneksi = new Koneksi();
 
-// Fetch data for the chart
 $data = $koneksi->getDataForChart();
 $categories = $data['categories'];
 $values = $data['values'];
 
-// Dummy data for penyakit anggrek info (replace with actual data retrieval)
 $namaPenyakit = "Nama dari penyakit anggrek";
 $deskripsiPenyakit = "Gejala adalah Indikasi awal penyakit anggrek";
 
-// Dummy data for berita tentang pengetahuan anggrek (replace with actual news data)
 $judulBerita = "Pengetahuan Anggrek: Panduan untuk Pemula";
 $isiBerita = "Dalam dunia anggrek, pengetahuan dasar sangatlah penting untuk keberhasilan dalam bercocok tanam. Di sini kami membahas panduan dasar tentang perawatan anggrek untuk pemula.
 Cek gejala dengan menginput indikasi gejala dari anggrek anda, kemudian submit agar gejala yang anda berikan di hitung oleh pengetahuan penyakit berdasarkan gejala dengan bobot yang kami hitung
@@ -22,7 +18,6 @@ Cek gejala dengan menginput indikasi gejala dari anggrek anda, kemudian submit a
 Dibawah ini adalah data yang kami munculkan di dalam chart
 ";
 
-// Fetch data for the second chart (assuming the query is executed similarly as before)
 $data2 = $koneksi->getChart2();
 $labels2 = $data2['labels'];
 $data2Values = $data2['data'];
@@ -42,15 +37,13 @@ $bubbleChartData = $koneksi->getBubbleChartData();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gejala Chart</title>
-    <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <!-- Include Chart.js from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             background-color: #f0f0f0;
             font-family: Arial, sans-serif;
-            padding-top: 80px; /* Adjusted top padding for navbar */
+            padding-top: 80px; 
         }
         .container {
             padding: 20px;
@@ -83,24 +76,19 @@ $bubbleChartData = $koneksi->getBubbleChartData();
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <!-- Welcome Card -->
                 <div class="card">
                     <h2>Selamat Datang!</h2>
                     <p>Ini adalah halaman beranda dari website Perhitungan Certainty Factor untuk mendeteksi Penyakit Anggrek. Silakan jelajahi informasi yang tersedia.</p>
                 </div>
             </div>
             <div class="col-md-6">
-                <!-- Penyakit Anggrek Card -->
                 <div class="card">
                     <h2>Informasi Penyakit Anggrek</h2>
                     <p><strong>Nama Penyakit:</strong> <?php echo $namaPenyakit; ?></p>
                     <p><strong>Gejala:</strong> <?php echo $deskripsiPenyakit; ?></p>
-                    <p>Ini Updatean Terbaru </p>
                 </div>
             </div>
         </div>
-
-        <!-- Berita tentang Pengetahuan Anggrek (Full Width Card) -->
         <div class="row">
             <div class="col-md-12">
                 <div class="card-full-width">
@@ -110,21 +98,17 @@ $bubbleChartData = $koneksi->getBubbleChartData();
             </div>
         </div>
 
-        <!-- Chart Section -->
         <div class="row">
             <div class="col-md-6">
-                <!-- First Chart (Line Chart) -->
                 <canvas id="myLineChart"></canvas>
             </div>
             <div class="col-md-6">
-                <!-- Second Chart (Bubble Chart) -->
                 <canvas id="myBubbleChart"></canvas>
             </div>
         </div>
         
         <div class="row">
             <div class="col-md-12">
-                <!-- Gejala Chart (Bar Chart) -->
                 <canvas id="gejalaChart"></canvas>
             </div>
         </div>

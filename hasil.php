@@ -126,7 +126,6 @@ $crud = new Crud();
                                                 $persen = 100;
                                                 $mdbaru = (float)$daftarKemungkinanPenyakit[$i]['md'];
 
-                                                // Hitung MB baru berdasarkan kondisi input pengguna
                                                 $mbbaru = (isset($test[$h])) ? (float)$test[$h] : (float)$daftarKemungkinanPenyakit[$i]['mb'];
 
                                                 if (count($listIdKemungkinan) == 0) {
@@ -225,9 +224,8 @@ $crud = new Crud();
     </div>
 
     <script>
-        // Script to handle PDF download
         document.getElementById('print-pdf').addEventListener('click', function () {
-            // Redirect to the PDF file for download
+       
             window.location.href = '<?php echo $pdfFilePath; ?>';
         });
     </script>

@@ -11,15 +11,12 @@ class Koneksi
 
     public function __construct()
     {
-        // Using the class properties inside the constructor
         $this->conn = mysqli_connect($this->localhost, $this->username, $this->password, $this->database);
 
-        // Check connection
         if (!$this->conn) {
             die("Error Koneksi ke database: " . mysqli_connect_error());
         } else {
-            // Connection successful (optional message)
-            // echo "Connected successfully";
+    
         }
     }
 
@@ -79,7 +76,6 @@ class Koneksi
         return ['categories' => $categories, 'values' => $values];
     }
 
-    //Buble chart buat pengetahuan
 
     public function getBubbleChartData() {
         $sql = "

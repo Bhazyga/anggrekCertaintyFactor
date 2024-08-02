@@ -1,19 +1,17 @@
 <?php
-include 'Koneksi.php'; // Include your Koneksi class file
+include 'Koneksi.php'; 
 
-$koneksi = new Koneksi(); // Instantiate the Koneksi class to establish database connection
-$conn = $koneksi->getConnection(); // Retrieve the database connection object
+$koneksi = new Koneksi(); 
+$conn = $koneksi->getConnection();
 
-// Check if connection is valid before using it
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Example query (replace with your actual query)
 $sql = "SELECT * FROM pengguna";
-$result = $conn->query($sql); // Execute the query using the connection object
+$result = $conn->query($sql);
 
-$conn->close(); // Close the database connection immediately after fetching data
+$conn->close(); 
 ?>
 
 <!DOCTYPE html>
