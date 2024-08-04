@@ -18,6 +18,7 @@ Cek gejala dengan menginput indikasi gejala dari anggrek anda, kemudian submit a
 Dibawah ini adalah data yang kami munculkan di dalam chart
 ";
 
+
 $data2 = $koneksi->getChart2();
 $labels2 = $data2['labels'];
 $data2Values = $data2['data'];
@@ -94,6 +95,26 @@ $bubbleChartData = $koneksi->getBubbleChartData();
                 <div class="card-full-width">
                     <h2><?php echo $judulBerita; ?></h2>
                     <p><?php echo $isiBerita; ?></p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mt-4">
+                <div class="card-full-width">
+                    <h2>Klik Tombol Berikut Untuk Cetak Laporan</h2>
+                    <form action="laporan.php" method="post">
+                        <input type="hidden" name="cetakPengetahuan" value="1">
+                        <button class="btn-primary" type="submit">Cetak Laporan Pengetahuan</button>
+                    </form>
+                    <form action="laporan.php" method="post">
+                        <input type="hidden" name="cetakGejala" value="1">
+                        <button class="btn-primary" type="submit">Cetak Laporan Gejala</button>
+                    </form>
+                    <form  action="laporan.php" method="post">
+                        <input type="hidden" name="cetakPenyakit" value="1">
+                        <button class="btn-primary" type="submit">Cetak Laporan Penyakit</button>
+                    </form>
+                
                 </div>
             </div>
         </div>

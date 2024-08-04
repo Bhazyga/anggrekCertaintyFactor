@@ -122,6 +122,11 @@ class Crud extends Koneksi
         $mpdf->SetHTMLHeader('<div style="text-align: left;"><img src="' . $logoPath . '" style="width: 100px; height: auto;"></div>');
 
         $mpdf->WriteHTML('<div> <h1 style="text-align: center;">Hasil Perhitungan CF</h1></div>');
+        $mpdf->WriteHTML('<div> <h4 style="text-align: center; font-size:13px;">TAMAN ANGGREK INDONESIA PERMAI,
+        Jl. Pratama Raya Pintu 1 Tmii No.22 dan 16 Kavling 21, Pinang Ranti, Kec. Makasar,
+        Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13560 </h4></div>');
+       $mpdf->writeHTML('<div style="border-top: 1px solid black; margin-top: 15px; padding-top: 5px;">&nbsp;</div>');
+     
 
         $merubahIndexCF = [];
 
@@ -171,9 +176,12 @@ class Crud extends Koneksi
         setlocale(LC_TIME, 'id_ID.UTF-8');
         $currentDate = strftime('%A %d-%m-%Y');
 
-        $mpdf->SetHTMLFooter('<div style="text-align: right;">Jakarta, ' . $currentDate . '</div>
-        <div style="border-top: 1px solid black; margin-top: 10px; padding-top: 5px;">&nbsp;</div>
+        $mpdf->SetHTMLFooter('<div style="text-align: right; margin-bottom:30px;">Jakarta, ' . $currentDate . '</div>
+        <div style="text-align: right; margin-top: 5%;"> Yang bertanda tangan dibawah ini</div>
+        <div style="text-align: right; margin-top: 20%;"> Jaka Purwanta</div>
+        <div style="border-top: 1px solid black; margin-top: 2%; padding-top: 5px;">&nbsp;</div>
         ');
+    
 
         $pdfFilePath = 'hasil_perhitungan_cf.pdf';
         $mpdf->Output(__DIR__ . '/' . $pdfFilePath, \Mpdf\Output\Destination::FILE);
